@@ -3,6 +3,7 @@ var router = express.Router();
 const http = require('https')
 const cheerio = require('cheerio');
 const db = require('../config/db');
+const loldetails = require('../util/lolconfig.json')
 
 /* GET home page. */
 router.get('/api/userinfo', function (req, res, next) {
@@ -54,4 +55,9 @@ router.get('/api/userinfo', function (req, res, next) {
 
 });
 
+router.get('/api/topic', function (req, res, next) {
+  // Math.floor(Math.random() * items.length)
+  const data = loldetails.list[Math.floor(Math.random() * loldetails.list.length)]
+  res.send(data)
+})
 module.exports = router;
