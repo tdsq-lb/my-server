@@ -3,7 +3,8 @@ var router = express.Router();
 const http = require('https')
 const cheerio = require('cheerio');
 const db = require('../config/db');
-const loldetails = require('../util/lolconfig.json')
+const loldetails = require('../util/lolconfig.json');
+const { match } = require('assert');
 
 /* 登陆用户信息 */
 router.get('/api/userinfo', function (req, res, next) {
@@ -59,8 +60,37 @@ router.get('/api/userinfo', function (req, res, next) {
 });
 /* 获取题目  */
 router.get('/api/topic', function (req, res, next) {
-  const data = loldetails.list[Math.floor(Math.random() * loldetails.list.length)]
-  res.send(data)
+  let data = Object.assign({}, loldetails.list[Math.floor(Math.random() * loldetails.list.length)])
+  let nameArr = []
+  loldetails.list.forEach((item, index) => {
+    if (item.images === data.images) {
+      return
+    } else {
+      nameArr = nameArr.concat(item.name)
+    }
+  })
+  console.log(nameArr, 'nameArr ========>>>')
+  function getRandomArrayElements(arr, count) {
+    var shuffled = arr.slice(0), i = arr.length, min = i - count, temp, index;
+    while (i-- > min) {
+      index = Math.floor((i + 1) * Math.random());
+      temp = shuffled[index];
+      shuffled[index] = shuffled[i];
+      shuffled[i] = temp;
+    }
+    return shuffled.slice(min)
+  }
+  let selectNameArr = getRandomArrayElements(nameArr, 12)
+  const answer = data.name[Math.floor(Math.random() * data.name.length)]
+  console.log(answer, 'answer ======>>>')
+  data.name = answer
+  selectNameArr.splice(parseInt(10 * Math.random()), 1, answer)
+  console.log(selectNameArr, 'selectNameArr ==========>>>')
+  const resdata = {
+    data,
+    selectNameArr
+  }
+  res.send(resdata)
 })
 
 /* 回答题目 */
