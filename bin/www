@@ -11,8 +11,8 @@ let https = require("https")
 const fs = require('fs')
 
 const httpsOption = {
-  key: fs.readFileSync("./https/4745572_www.tdsq.top.key"),
-  cert: fs.readFileSync("./https/4745572_www.tdsq.top.pem")
+  key: fs.readFileSync("./https/www.tdsq.top.key"),
+  cert: fs.readFileSync("./https/www.tdsq.top.pem")
 }
 
 const PORT = 3000;
