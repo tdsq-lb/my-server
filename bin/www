@@ -15,15 +15,15 @@ const httpsOption = {
   cert: fs.readFileSync("./https/4745572_www.tdsq.top.pem")
 }
 
-// const PORT = 3000;
-const SSLPORT = 3000;
+const PORT = 3000;
+const SSLPORT = 443;
 
-// const httpServer = http.createServer(app)
+const httpServer = http.createServer(app)
 const httpsServer = https.createServer(httpsOption,app)
 
-// httpServer.listen(PORT, function() {
-//   console.log('HTTP Server is running on: http://localhost:%s', PORT);
-// });
+httpServer.listen(PORT, function() {
+  console.log('HTTP Server is running on: http://localhost:%s', PORT);
+});
 
 httpsServer.listen(SSLPORT, function() {
   console.log('HTTPS Server is running on: https://localhost:%s', SSLPORT);
