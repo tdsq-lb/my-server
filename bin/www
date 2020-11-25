@@ -19,12 +19,12 @@ const PORT = 3000;
 const SSLPORT = 443;
 
 const httpServer = http.createServer(app)
-const httpsServer = https.createServer(httpsOption,app)
+// const httpsServer = https.createServer(httpsOption,app)
 
 httpServer.listen(PORT, function() {
   console.log('HTTP Server is running on: http://localhost:%s', PORT);
 });
 
-httpsServer.listen(SSLPORT, function() {
-  console.log('HTTPS Server is running on: https://localhost:%s', SSLPORT);
-});
+// httpsServer.listen(SSLPORT, function() {
+//   console.log('HTTPS Server is running on: https://localhost:%s', SSLPORT);
+// });
